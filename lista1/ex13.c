@@ -1,27 +1,29 @@
 #include <stdio.h>
 
 int main(void) {
-    double med, max = 0, min, tmp;
+    double x1, x2, x3, tmp;
 
-    scanf("%lf", &min);
+    scanf("%lf %lf %lf", &x1, &x2, &x3);
 
-    int i;
-    for (i = 0; i < 2; i++) {
-        scanf("%lf", &med);
-
-        if (med > max) {
-            tmp = max;
-            max = med;
-            med = tmp;
-        }
-        else if (med < min) {
-            tmp = min;
-            min = med;
-            med = tmp;
-        }
+    if (x1 > x2) {
+        tmp = x2;
+        x2 = x1;
+        x1 = tmp;
     }
 
-    printf("%.2lf, %.2lf, %.2lf\n", min, med, max);
+    if (x2 > x3) {
+        tmp = x3;
+        x3 = x2;
+        x2 = tmp;
+    }
+
+    if (x1 > x2) {
+        tmp = x2;
+        x2 = x1;
+        x1 = tmp;
+    }
+
+    printf("%.2lf, %.2lf, %.2lf\n", x1, x2, x3);
 
     return 0;
 }
