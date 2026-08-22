@@ -5,6 +5,10 @@ int main(void) {
 
     scanf("%d", &n);
 
+    if (n < 2) {
+        printf("Campeonato invalido!\n");
+    }
+
     int i;
     int j;
     int c;
