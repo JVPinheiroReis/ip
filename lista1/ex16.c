@@ -1,9 +1,9 @@
 #include <stdio.h>
 
 int main() {
-    int n;
+    long long n = 0;
 
-    scanf("%d", &n);
+    scanf("%lld", &n);
 
     if (n < 0 || n > 255) {
         printf("Numero invalido!\n");
@@ -21,4 +21,6 @@ int main() {
         }
     }
     printf("\n");
+
+    return 0;
 }
