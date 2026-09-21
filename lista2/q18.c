@@ -1,15 +1,5 @@
 #include <stdio.h>
-
-int strfind(char c, char *s) {
-    int i;
-    for (i = 0; s[i] != '\0'; i++) {
-        if (s[i] == c) {
-            return i;
-        }
-    }
-
-    return -1;
-}
+#include <string.h>
 
 int main(void) {
     int N;
@@ -17,8 +7,9 @@ int main(void) {
     scanf("%d%*c", &N);
 
     int a, b;
+    char s_n[5 + 1];
 
-    int i, j;
+    int i, j, k;
     for (i = 0; i < N; i++) {
         scanf("%d %d", &a, &b);
 
@@ -27,7 +18,11 @@ int main(void) {
         }
 
         for (j = b; j >= a; j--) {
-            printf("%d", j);
+            sprintf(s_n, "%d", j);
+
+            for (k = strlen(s_n) - 1; k >= 0; k--) {
+                printf("%c", s_n[k]);
+            }
         }
 
         printf("\n");
