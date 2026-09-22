@@ -52,15 +52,23 @@ int main(void) {
 
     int i;
     for (i = 0; i < n; i++) {
-        scanf("%d %d %d %d %[^\n]%*c", &s[i].id, &s[i].birthday.day,
-              &s[i].birthday.month, &s[i].birthday.year, s[i].name);
+        scanf("%d %d %d %d %[^\n]%*c",
+              &s[i].id,
+              &s[i].birthday.day,
+              &s[i].birthday.month,
+              &s[i].birthday.year,
+              s[i].name);
     }
 
     bubble_sort(s, n);
 
     for (i = 0; i < n; i++) {
-        printf("Matric.: %d Nome: %s Data Nasc: %d/%d/%d\n", s[i].id, s[i].name,
-               s[i].birthday.day, s[i].birthday.month, s[i].birthday.year);
+        printf("Matric.: %d Nome: %s Data Nasc: %d/%d/%d\n",
+               s[i].id,
+               s[i].name,
+               s[i].birthday.day,
+               s[i].birthday.month,
+               s[i].birthday.year);
     }
 
     free(s);

@@ -1,42 +1,43 @@
 #include <stdio.h>
 
 char lowercase(char c) {
-    if ('A' <= c && c <= 'Z') {
-        return c + 'a' - 'A';
-    }
-    else {
-        return c;
-    }
+    if ('A' <= c && c <= 'Z') return c + ('a' - 'A');
+
+    return c;
 }
 
 int main(void) {
-    char s[100 * 50] = "\0";
+    int ac, seq;
+    char c, p_c;
+    char s[5101];
 
-    scanf("%[^\n]%*c", s);
+    while (scanf(" %5100[^\n]", s) == 1) {
+        ac = 0;
+        seq = 1;
+        p_c = '\0';
 
-    int ac = 0;
-    char c = '\0';
-    char p1_c = '\0';
-    char p2_c = '\0';
+        int i;
+        for (i = 0; s[i] != '\0'; i++) {
+            if (i == 0 || s[i] == ' ') {
+                c = lowercase(s[i == 0 ? i : i + 1]);
 
-    int i;
-    for (i = 0; s[i] != '\0'; i++) {
-        if (i == 0 || s[i] == ' ') {
-            if (i == 0)
-                c = lowercase(s[i]);
-            else if (s[i] == ' ')
-                c = lowercase(s[i + 1]);
+                if (c == p_c) {
+                    seq++;
+                }
+                else {
+                    seq = 1;
+                }
 
-            if (c == p1_c && p1_c != p2_c) {
-                ac++;
+                if (seq == 2) {
+                    ac++;
+                }
+
+                p_c = c;
             }
-
-            p2_c = p1_c;
-            p1_c = c;
         }
-    }
 
-    printf("%d", ac);
+        printf("%d\n", ac);
+    }
 
     return 0;
 }
