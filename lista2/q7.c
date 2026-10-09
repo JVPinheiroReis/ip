@@ -18,12 +18,11 @@ int main(void) {
     int i;
     int j;
     char c;
-    int s_size;
     for (i = 0; i < n; i++) {
         char s[1000 + 1] = "";
         char t[1000 + 1] = "";
 
-        scanf("%[^\n]%*c", s);
+        scanf("%1000[^\n]%*c", s);
 
         int s_size = str_len(s);
 

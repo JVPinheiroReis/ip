@@ -13,7 +13,7 @@ int **cria_matrix(int n) {
 }
 
 void destroi_matrix(int **m, int n) {
-    int i, j;
+    int i;
     for (i = 0; i < n; i++) {
         free(m[i]);
     }

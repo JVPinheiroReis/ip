@@ -17,8 +17,8 @@ int main(void) {
     int r_i = -1;
     int r_j = -1;
     int u, d, l, r;
-    for (i = 0; i < n; i++) {
-        for (j = 0; j < m; j++) {
+    for (i = 0; i < n && r_i == -1; i++) {
+        for (j = 0; j < m && r_i == -1; j++) {
             if (mt[i][j] == 1111) {
                 u = i - 1 >= 0 ? mt[i - 1][j] : mt[i - 1 + n][j];
                 d = i + 1 < n ? mt[i + 1][j] : mt[i + 1 - n][j];
@@ -28,14 +28,12 @@ int main(void) {
                 if (u == 4 && d == 8 && l == 0 && r == 0) {
                     r_i = i;
                     r_j = j;
-
-                    break;
                 }
             }
         }
     }
 
-    if (r_i == -1 && r_j == -1) {
+    if (r_i == -1) {
         printf("WALLY NAO ESTA NA MATRIZ\n");
     }
     else {

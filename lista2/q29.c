@@ -32,8 +32,8 @@ int main() {
     char str[256];
     char clr[256];
 
-    scanf("%[^\n]%*c", str);
-    scanf("%[^\n]%*c", clr);
+    scanf("%255[^\n]%*c", str);
+    scanf("%255[^\n]%*c", clr);
 
     str_clean(str, clr);
 

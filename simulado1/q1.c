@@ -1,38 +1,20 @@
 #include <stdio.h>
 
+/* Retorna e tal que b^e == a (e >= 1), ou 0 se a nao for potencia de b. */
 int calcula_log(int a, int b) {
+    long long pot = b;
     int e = 1;
-    int hold_b = b;
 
-    while (b <= a) {
-        if (b == a) {
-            return e;
-        }
-
+    while (pot < a) {
+        pot *= b;
         e++;
-        b *= hold_b;
     }
 
-    return 0;
+    return pot == a ? e : 0;
 }
 
-int eh_potencia(int a, int b) {
-    int hold_b = b;
-
-    while (b <= a) {
-        if (b == a) {
-            return 1;
-        }
-
-        b *= hold_b;
-    }
-
-    return 0;
-}
-
+/* Se n for potencia de um primo k, guarda k e o expoente p e retorna 1. */
 int potencia_prima(int n, int *k, int *p) {
-    int c = 0;
-
     int i;
     for (i = 2; i <= n; i++) {
         if (n % i == 0) {
@@ -40,9 +22,11 @@ int potencia_prima(int n, int *k, int *p) {
         }
     }
 
-    if (eh_potencia(n, i)) {
+    /* o menor divisor >= 2 de n e sempre primo */
+    int e = calcula_log(n, i);
+    if (e > 0) {
         *k = i;
-        *p = calcula_log(n, i);
+        *p = e;
         return 1;
     }
 

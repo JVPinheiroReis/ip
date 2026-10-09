@@ -1,20 +1,14 @@
 #include <stdio.h>
 
-int reverse_n5(int n) {
+int inverte(int n) {
     int r = 0;
 
-    int i;
-    int j;
-    for (i = 10000; i >= 1; i /= 10) {
-        if (n >= i) {
-            for (j = 1; j <= i; j *= 10) {
-                r += ((n / (i / j)) % 10) * j;
-            }
-            return r;
-        }
+    while (n > 0) {
+        r = r * 10 + n % 10;
+        n /= 10;
     }
 
-    return -1;
+    return r;
 }
 
 int main(void) {
@@ -22,12 +16,12 @@ int main(void) {
 
     scanf("%d", &n);
 
-    if (n >= 100000) {
+    if (n < 0 || n >= 100000) {
         printf("NUMERO INVALIDO\n");
         return 0;
     }
 
-    if (n == reverse_n5(n)) {
+    if (n == inverte(n)) {
         printf("PALINDROMO\n");
     }
     else {

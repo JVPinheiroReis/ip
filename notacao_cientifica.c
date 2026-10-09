@@ -2,19 +2,15 @@
 #define STR_SIZE 128
 
 double potencia(int n, int e) {
+    if (e < 0) {
+        return 1.0 / potencia(n, -e);
+    }
+
     double tmp = 1;
 
     int i;
-    if (e >= 0) {
-        for (i = 0; i < e; i++) {
-            tmp *= n;
-        }
-    }
-    else {
-        e *= -1;
-        for (i = 0; i < e; i++) {
-            tmp /= n;
-        }
+    for (i = 0; i < e; i++) {
+        tmp *= n;
     }
 
     return tmp;
@@ -83,7 +79,10 @@ double ascii2double(const char *str) {
 }
 
 double string2double(const char *str) {
-    const int pos_e = encontra_char(str, 'e') + encontra_char(str, 'E') + 1;
+    int pos_e = encontra_char(str, 'e');
+    if (pos_e == -1) {
+        pos_e = encontra_char(str, 'E');
+    }
 
     int i;
     if (pos_e == -1) {
@@ -104,7 +103,7 @@ double string2double(const char *str) {
             s_e[i - (pos_e + 1)] = str[i];
         }
 
-        int e = ascii2double(s_e);
+        int e = (int)ascii2double(s_e);
 
         return n * potencia(10, e);
     }

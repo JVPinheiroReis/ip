@@ -5,8 +5,6 @@ int main(void) {
 
     scanf("%d %d", &m, &n);
 
-    int mt[m][n];
-
     int b;
     int sn = 1;
 

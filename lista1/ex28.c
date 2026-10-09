@@ -10,12 +10,25 @@ long long mdc(long long a, long long b) {
 }
 
 int main(void) {
-    long long input = 0, decimal = 0;
+    long long inteira = 0, decimal = 0;
     long long den = 1;
+    int sinal = 1;
 
-    scanf("%lld", &input);
+    int c = getchar();
+    while (c == ' ' || c == '\n') {
+        c = getchar();
+    }
 
-    char c = getchar();
+    if (c == '-') {
+        sinal = -1;
+        c = getchar();
+    }
+
+    while (c >= '0' && c <= '9') {
+        inteira = inteira * 10 + (c - '0');
+        c = getchar();
+    }
+
     if (c == '.') {
         while ((c = getchar()) >= '0' && c <= '9') {
             decimal = decimal * 10 + (c - '0');
@@ -23,8 +36,8 @@ int main(void) {
         }
     }
 
-    long long num = input * den + decimal;
-    long long d = mdc(num, den);
+    long long num = sinal * (inteira * den + decimal);
+    long long d = mdc(num < 0 ? -num : num, den);
 
     num /= d;
     den /= d;

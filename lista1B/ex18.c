@@ -5,9 +5,9 @@ int main(void) {
 
     scanf("%d", &n);
 
-    if (n < 2) {
+    while (n < 2) {
         printf("Fatoracao nao e possivel para o numero %d!\n", n);
-        return main();
+        scanf("%d", &n);
     }
 
     printf("%d = ", n);

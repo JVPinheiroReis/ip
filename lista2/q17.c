@@ -22,7 +22,7 @@ int main(void) {
 
     int i;
     for (i = 0; i < N; i++) {
-        scanf("%c %[^\n]%*c", &c, s);
+        scanf("%c %499[^\n]%*c", &c, s);
 
         r = strfind(c, s);
 
@@ -32,8 +32,6 @@ int main(void) {
         else {
             printf("Caractere %c encontrado no indice %d da string.\n", c, r);
         }
-
-        strfind(c, s);
     }
 
     return 0;

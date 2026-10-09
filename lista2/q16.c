@@ -25,15 +25,17 @@ int main(void) {
     int n;
     char s[499 + 1];
 
-    int i, j;
+    int i;
     for (i = 0; i < N; i++) {
         scanf("%d%*c", &n);
 
-        scanf("%[^\n]%*c", s);
+        scanf("%499[^\n]%*c", s);
 
-        printf("%s", corta_string(n, s));
+        char *t = corta_string(n, s);
 
-        printf("\n");
+        printf("%s\n", t);
+
+        free(t);
     }
 
     return 0;

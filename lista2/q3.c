@@ -16,7 +16,7 @@ int main(void) {
         int cl = 0;
         int cv = 0;
         int cc = 0;
-        for (j = 0; s[j] != '\n'; j++) {
+        for (j = 0; s[j] != '\0'; j++) {
             char c = s[j];
             if (('A' <= c && c <= 'Z') || ('a' <= c && c <= 'z')) {
                 cl++;
