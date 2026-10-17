@@ -1,6 +1,5 @@
 #include <stdio.h>
 
-/* Retorna e tal que b^e == a (e >= 1), ou 0 se a nao for potencia de b. */
 int calcula_log(int a, int b) {
     long long pot = b;
     int e = 1;
@@ -13,7 +12,6 @@ int calcula_log(int a, int b) {
     return pot == a ? e : 0;
 }
 
-/* Se n for potencia de um primo k, guarda k e o expoente p e retorna 1. */
 int potencia_prima(int n, int *k, int *p) {
     int i;
     for (i = 2; i <= n; i++) {
@@ -22,7 +20,6 @@ int potencia_prima(int n, int *k, int *p) {
         }
     }
 
-    /* o menor divisor >= 2 de n e sempre primo */
     int e = calcula_log(n, i);
     if (e > 0) {
         *k = i;
