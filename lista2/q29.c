@@ -1,5 +1,7 @@
 #include <stdio.h>
 
+#define N 257
+
 int in_str(char c, char *s) {
     int i;
     for (i = 0; s[i] != '\0'; i++) {
@@ -7,33 +9,27 @@ int in_str(char c, char *s) {
             return 1;
         }
     }
-
     return 0;
 }
 
 void str_clean(char *str, char *clr) {
-    char tmp[256] = "";
-
-    int i;
-    int j = 0;
-    for (i = 0; str[i] != '\0'; i++) {
+    int i = 0, j = 0;
+    while (str[i] != '\0') {
         if (!in_str(str[i], clr)) {
-            tmp[j++] = str[i];
+            str[j] = str[i];
+            j++;
         }
+        i++;
     }
-
-    for (i = 0; tmp[i] != '\0'; i++) {
-        str[i] = tmp[i];
-    }
-    str[i] = '\0';
+    str[j] = '\0';
 }
 
 int main() {
-    char str[256];
-    char clr[256];
+    char str[N] = "";
+    char clr[N] = "";
 
-    scanf("%255[^\n]%*c", str);
-    scanf("%255[^\n]%*c", clr);
+    scanf("%[^\n]%*c", str);
+    scanf("%[^\n]%*c", clr);
 
     str_clean(str, clr);
 
