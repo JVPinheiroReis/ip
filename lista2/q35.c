@@ -1,142 +1,77 @@
 #include <stdio.h>
 
 typedef struct {
-    float coef;
-    int exp;
-} Termo;
-
-typedef struct {
-    Termo termos[100];
-    int qtd;
-} Polinomio;
-
-void LePolinomio(Polinomio *p) {
-    int i;
-    scanf("%d", &(p->qtd));
-    for (i = 0; i < p->qtd; i++) {
-        scanf("%f %d", &(p->termos[i].coef), &(p->termos[i].exp));
-    }
-}
-
-Polinomio SomaPolinomios(Polinomio p1, Polinomio p2) {
-    Polinomio res;
-    int i = 0, j = 0, k = 0;
-
-    while (i < p1.qtd && j < p2.qtd) {
-        if (p1.termos[i].exp > p2.termos[j].exp) {
-            res.termos[k++] = p1.termos[i++];
-        }
-        else if (p1.termos[i].exp < p2.termos[j].exp) {
-            res.termos[k++] = p2.termos[j++];
-        }
-        else {
-            float soma = p1.termos[i].coef + p2.termos[j].coef;
-            float abs_soma = (soma < 0) ? -soma : soma;
-
-            if (abs_soma > 1e-5) {
-                res.termos[k].coef = soma;
-                res.termos[k].exp = p1.termos[i].exp;
-                k++;
-            }
-            i++;
-            j++;
-        }
-    }
-
-    while (i < p1.qtd)
-        res.termos[k++] = p1.termos[i++];
-    while (j < p2.qtd)
-        res.termos[k++] = p2.termos[j++];
-
-    res.qtd = k;
-    return res;
-}
-
-Polinomio SubtraiPolinomios(Polinomio p1, Polinomio p2) {
-    Polinomio res;
-    int i = 0, j = 0, k = 0;
-
-    while (i < p1.qtd && j < p2.qtd) {
-        if (p1.termos[i].exp > p2.termos[j].exp) {
-            res.termos[k++] = p1.termos[i++];
-        }
-        else if (p1.termos[i].exp < p2.termos[j].exp) {
-            res.termos[k].coef = -p2.termos[j].coef;
-            res.termos[k].exp = p2.termos[j].exp;
-            k++;
-            j++;
-        }
-        else {
-            float dif = p1.termos[i].coef - p2.termos[j].coef;
-            float abs_dif = (dif < 0) ? -dif : dif;
-
-            if (abs_dif > 1e-5) {
-                res.termos[k].coef = dif;
-                res.termos[k].exp = p1.termos[i].exp;
-                k++;
-            }
-            i++;
-            j++;
-        }
-    }
-
-    while (i < p1.qtd)
-        res.termos[k++] = p1.termos[i++];
-
-    while (j < p2.qtd) {
-        res.termos[k].coef = -p2.termos[j].coef;
-        res.termos[k].exp = p2.termos[j].exp;
-        k++;
-        j++;
-    }
-
-    res.qtd = k;
-    return res;
-}
-
-void ImprimePolinomio(Polinomio p) {
-    int i;
-
-    if (p.qtd == 0) {
-        printf("0.00\n");
-        return;
-    }
-
-    for (i = 0; i < p.qtd; i++) {
-        float c = p.termos[i].coef;
-        int e = p.termos[i].exp;
-
-        if (i == 0) {
-            printf(c < 0 ? "-" : "+");
-        }
-        else {
-            printf(c < 0 ? "-" : "+");
-        }
-        if (c < 0) c = -c;
-
-        if (e > 0) printf("%.2fX^%d", c, e);
-        else printf("%.2f", c);
-    }
-    printf("\n");
-}
+    float c;
+    int e;
+} PolTerm;
 
 int main(void) {
-    int casos, c;
-    char op[5];
+    int n;
 
-    if (scanf("%d", &casos) != 1) return 0;
+    scanf("%d%*c", &n);
 
-    for (c = 0; c < casos; c++) {
-        Polinomio p1, p2, res;
+    int i, j, k, l;
+    for (i = 0; i < n; i++) {
+        char op;
+        int n1;
+        int n2;
+        PolTerm p1[51] = {0};
+        PolTerm p2[51] = {0};
 
-        scanf("%4s", op);
-        LePolinomio(&p1);
-        LePolinomio(&p2);
+        scanf("%c%*c", &op);
 
-        if (op[0] == '+') res = SomaPolinomios(p1, p2);
-        else res = SubtraiPolinomios(p1, p2);
+        scanf("%d%*c", &n1);
+        for (j = 0; j < n1; j++) {
+            scanf("%f %d%*c", &p1[j].c, &p1[j].e);
+        }
+        p1[n1].e = -1;
 
-        ImprimePolinomio(res);
+        scanf("%d%*c", &n2);
+        for (j = 0; j < n2; j++) {
+            scanf("%f %d%*c", &p2[j].c, &p2[j].e);
+        }
+        p2[n2].e = -1;
+
+        PolTerm p3[100] = {0};
+
+        j = 0;
+        k = 0;
+        l = 0;
+        while (j < n1 || k < n2) {
+            if (p1[j].e > p2[k].e) {
+                p3[l].c += p1[j].c;
+                p3[l].e = p1[j].e;
+                j++;
+            }
+            else if (p1[j].e == p2[k].e) {
+                p3[l].c += op == '+' ? p1[j].c + p2[k].c : p1[j].c - p2[k].c;
+                p3[l].e = p1[j].e;
+                j++;
+                k++;
+            }
+            else {
+                p3[l].c += op == '+' ? p2[k].c : -p2[k].c;
+                p3[l].e = p2[k].e;
+                k++;
+            }
+            l++;
+        }
+
+        int n3 = l;
+
+        for (j = 0; j < n3; j++) {
+            if (p3[j].c > 0) {
+                printf("+%.2f", p3[j].c);
+            }
+            else if (p3[j].c < 0) {
+                printf("%.2f", p3[j].c);
+            }
+
+            if (p3[j].c != 0 && p3[j].e != 0) {
+                printf("X^%d", p3[j].e);
+            }
+        }
+        printf("\n");
     }
 
     return 0;
