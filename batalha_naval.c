@@ -1,4 +1,3 @@
-#include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -24,8 +23,9 @@ void mostra_tabuleiro(char **Tab, int nl, int nc, int mostrar_navios) {
      */
     if (!mostrar_navios) {
         printf("  ");
-        for (c = 0; c < nc; c++)
+        for (c = 0; c < nc; c++) {
             printf("%d ", c);
+        }
         printf("\n");
     }
 
@@ -40,19 +40,24 @@ void mostra_tabuleiro(char **Tab, int nl, int nc, int mostrar_navios) {
 
     if (mostrar_navios) {
         printf("  ");
-        for (c = 0; c < nc; c++)
+        for (c = 0; c < nc; c++) {
             printf("%d ", c);
+        }
         printf("\n");
     }
 }
 
 void screen(char **PC, char **J, int nl, int nc) {
     int c;
+
     mostra_tabuleiro(PC, nl, nc, 0);
+
     printf("==");
-    for (c = 0; c < nc; c++)
+    for (c = 0; c < nc; c++) {
         printf("==");
+    }
     printf("\n");
+
     mostra_tabuleiro(J, nl, nc, 1);
 }
 
@@ -64,9 +69,11 @@ int sorteia(int min, int max) {
 void sorteia_tabuleiro(char **Tab, int nl, int nc, int nv) {
     int n = 0;
     int l, c;
+
     while (n < nv) {
         l = sorteia(0, nl - 1);
         c = sorteia(0, nc - 1);
+
         if (Tab[l][c] == AGUA) {
             Tab[l][c] = NAVIO;
             n++;
@@ -87,9 +94,11 @@ char **cria_tabuleiro(int nl, int nc) {
     int i;
     char **Tab = NULL;
     Tab = (char **)malloc(nl * sizeof(char *));
+
     for (i = 0; i < nl; i++) {
         Tab[i] = (char *)malloc(nc * sizeof(char));
     }
+
     return Tab;
 }
 
@@ -116,12 +125,12 @@ char uppercase(char c) {
 }
 
 int main() {
+    char ch;
+    int l, c;
+    int nv = 7;
+    int nl = 5, nc = 8;
     char **TabPC = NULL;
     char **TabJ = NULL;
-    int nl = 5, nc = 8;
-    int nv = 7;
-    int l, c;
-    char ch;
 
     // primeira jogada: 1 para J, 0 para PC
     int jogada = 1;
