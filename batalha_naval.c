@@ -184,11 +184,13 @@ int main() {
 
         if (jogada) {
             // Jogador
-            printf("Jogada: ");
-            scanf(" %c%d", &ch, &c);
-
-            ch = uppercase(ch);
-            l = ch - 'A';
+            do {
+                printf("Jogada: ");
+                scanf(" %c%d", &ch, &c);
+                ch = uppercase(ch);
+                l = ch - 'A';
+            }
+            while (TabPC[l][c] == EXPLOSAO || TabPC[l][c] == FALHA);
 
             if (TabPC[l][c] == NAVIO) TabPC[l][c] = EXPLOSAO;
             else if (TabPC[l][c] == AGUA) TabPC[l][c] = FALHA;
