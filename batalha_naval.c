@@ -152,10 +152,14 @@ int conta_navios(char **Tab, int nl, int nc) {
 int main() {
     char ch;
     int l, c;
-    int nv = 5;
-    int nl = 5, nc = 8;
     char **TabPC = NULL;
     char **TabJ = NULL;
+
+    // número de navios comuns
+    int nv = 5;
+
+    // dimensões do tabuleiro
+    int nl = 5, nc = 8;
 
     // primeira jogada: 1 para J, 0 para PC
     int jogada = 1;
