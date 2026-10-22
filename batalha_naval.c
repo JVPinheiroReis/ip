@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <unistd.h>
 
 #define AGUA ' '
 #define NAVIO '@'
@@ -125,15 +126,10 @@ int main() {
     sorteia_tabuleiro(TabJ, nl, nc, nv);
 
     do {
-        printf("\n\n\n\n\n\n\n\n\n");
+        clearScreen();
         screen(TabPC, TabJ, nl, nc);
+        sleep(1);
         if (jogada % 2 == 0) {
-            do {
-                printf("Digite \'c\' para continuar...");
-                scanf("%c%*c", &ch);
-            }
-            while (ch != 'c');
-
             // Jogador
             printf("Jogada: ");
             scanf("%c%d%*c", &ch, &c);
