@@ -104,8 +104,9 @@ char **cria_tabuleiro(int nl, int nc) {
 
 void libera_tabuleiro(char **Tab, int nl) {
     int l;
-    for (l = 0; l < nl; l++)
+    for (l = 0; l < nl; l++) {
         free(Tab[l]);
+    }
     free(Tab);
 }
 
@@ -124,7 +125,7 @@ char uppercase(char c) {
     return c;
 }
 
-int navios_restantes(char **Tab, int nl, int nc) {
+int conta_navios(char **Tab, int nl, int nc) {
     int r = 0;
 
     int l, c;
@@ -161,8 +162,11 @@ int main() {
 
     do {
         clearScreen();
+
         screen(TabPC, TabJ, nl, nc);
+
         sleep(1);
+
         if (jogada) {
             // Jogador
             printf("Jogada: ");
@@ -173,11 +177,6 @@ int main() {
 
             if (TabPC[l][c] == NAVIO) TabPC[l][c] = EXPLOSAO;
             else if (TabPC[l][c] == AGUA) TabPC[l][c] = FALHA;
-
-            if (navios_restantes(TabPC, nl, nc) == 0) {
-                printf("Parabéns jogador, você venceu!\n");
-                return 0;
-            }
         }
         else {
             // PC
@@ -186,16 +185,20 @@ int main() {
 
             if (TabJ[l][c] == NAVIO) TabJ[l][c] = EXPLOSAO;
             else if (TabJ[l][c] == AGUA) TabJ[l][c] = FALHA;
-
-            if (navios_restantes(TabJ, nl, nc) == 0) {
-                printf("Jogador derrotado!\n");
-                return 0;
-            }
         }
 
         jogada = !jogada;
     }
-    while (1);
+    while (conta_navios(TabPC, nl, nc) * conta_navios(TabJ, nl, nc) != 0);
+
+    if (conta_navios(TabPC, nl, nc) == 0) {
+        printf("Parabéns jogador, você venceu!\n");
+        return 0;
+    }
+    else {
+        printf("Jogador derrotado!\n");
+        return 0;
+    }
 
     libera_tabuleiro(TabPC, nl);
     libera_tabuleiro(TabJ, nl);
