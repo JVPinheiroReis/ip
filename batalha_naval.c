@@ -96,6 +96,14 @@ void libera_tabuleiro(char **Tab, int nl) {
     free(Tab);
 }
 
+void clearScreen() {
+#ifdef _WIN32
+    system("cls");
+#else
+    system("clear");
+#endif
+}
+
 int main() {
     char **TabPC = NULL;
     char **TabJ = NULL;
