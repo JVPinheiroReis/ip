@@ -67,8 +67,19 @@ int sorteia(int min, int max) {
 }
 
 void sorteia_tabuleiro(char **Tab, int nl, int nc, int nv) {
-    int n = 0;
+    int i;
     int l, c;
+    int n = 0;
+
+    // navio grande, 3 posições
+    l = sorteia(0, nl - 1);
+    c = sorteia(0, nc - 1 - 2);
+
+    for (i = 0; i < 3; i++) {
+        Tab[l][c + i] = NAVIO;
+    }
+
+    // navios comuns
     while (n < nv) {
         do {
             l = sorteia(0, nl - 1);
@@ -141,7 +152,7 @@ int conta_navios(char **Tab, int nl, int nc) {
 int main() {
     char ch;
     int l, c;
-    int nv = 7;
+    int nv = 5;
     int nl = 5, nc = 8;
     char **TabPC = NULL;
     char **TabJ = NULL;
