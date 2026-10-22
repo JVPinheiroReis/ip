@@ -4,8 +4,8 @@
 #include <unistd.h>
 
 #define AGUA ' '
-#define NAVIO '@'
-#define EXPLOSAO '*'
+#define NAVIO '#'
+#define EXPLOSAO 'X'
 #define FALHA '-'
 
 void mostra_tabuleiro(char **Tab, int nl, int nc, int mostrar_navios) {
