@@ -1,3 +1,4 @@
+#include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -107,14 +108,23 @@ void clearScreen() {
 #endif
 }
 
+char uppercase(char c) {
+    if ('a' <= c && c <= 'z') {
+        return c + 'A' - 'a';
+    }
+    return c;
+}
+
 int main() {
     char **TabPC = NULL;
     char **TabJ = NULL;
     int nl = 5, nc = 8;
     int nv = 7;
-    int jogada = 0;
     int l, c;
     char ch;
+
+    // primeira jogada: 1 para J, 0 para PC
+    int jogada = 1;
 
     srand(time(0));
 
@@ -131,11 +141,14 @@ int main() {
         clearScreen();
         screen(TabPC, TabJ, nl, nc);
         sleep(1);
-        if (jogada % 2 == 0) {
+        if (jogada) {
             // Jogador
             printf("Jogada: ");
             scanf(" %c%d", &ch, &c);
+
+            ch = uppercase(ch);
             l = ch - 'A';
+
             if (TabPC[l][c] == NAVIO) TabPC[l][c] = EXPLOSAO;
             else if (TabPC[l][c] == AGUA) TabPC[l][c] = FALHA;
         }
@@ -147,7 +160,7 @@ int main() {
             if (TabJ[l][c] == NAVIO) TabJ[l][c] = EXPLOSAO;
             else if (TabJ[l][c] == AGUA) TabJ[l][c] = FALHA;
         }
-        jogada++;
+        jogada = !jogada;
     }
     while (1);
 
