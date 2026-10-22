@@ -124,6 +124,19 @@ char uppercase(char c) {
     return c;
 }
 
+int navios_restantes(char **Tab, int nl, int nc) {
+    int r = 0;
+
+    int l, c;
+    for (l = 0; l < nl; l++) {
+        for (c = 0; c < nc; c++) {
+            if (Tab[l][c] == NAVIO) r++;
+        }
+    }
+
+    return r;
+}
+
 int main() {
     char ch;
     int l, c;
@@ -160,6 +173,11 @@ int main() {
 
             if (TabPC[l][c] == NAVIO) TabPC[l][c] = EXPLOSAO;
             else if (TabPC[l][c] == AGUA) TabPC[l][c] = FALHA;
+
+            if (navios_restantes(TabPC, nl, nc) == 0) {
+                printf("Parabéns jogador, você venceu!\n");
+                return 0;
+            }
         }
         else {
             // PC
@@ -168,7 +186,13 @@ int main() {
 
             if (TabJ[l][c] == NAVIO) TabJ[l][c] = EXPLOSAO;
             else if (TabJ[l][c] == AGUA) TabJ[l][c] = FALHA;
+
+            if (navios_restantes(TabJ, nl, nc) == 0) {
+                printf("Jogador derrotado!\n");
+                return 0;
+            }
         }
+
         jogada = !jogada;
     }
     while (1);
