@@ -75,9 +75,11 @@ void sorteia_tabuleiro(char **Tab, int nl, int nc, int nv) {
 
 void init_tabuleiro(char **Tab, int nl, int nc) {
     int l, c;
-    for (l = 0; l < nl; l++)
-        for (c = 0; c < nc; c++)
+    for (l = 0; l < nl; l++) {
+        for (c = 0; c < nc; c++) {
             Tab[l][c] = AGUA;
+        }
+    }
 }
 
 char **cria_tabuleiro(int nl, int nc) {
@@ -132,7 +134,7 @@ int main() {
         if (jogada % 2 == 0) {
             // Jogador
             printf("Jogada: ");
-            scanf("%c%d%*c", &ch, &c);
+            scanf(" %c%d", &ch, &c);
             l = ch - 'A';
             if (TabPC[l][c] == NAVIO) TabPC[l][c] = EXPLOSAO;
             else if (TabPC[l][c] == AGUA) TabPC[l][c] = FALHA;
