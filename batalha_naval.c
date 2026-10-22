@@ -69,15 +69,15 @@ int sorteia(int min, int max) {
 void sorteia_tabuleiro(char **Tab, int nl, int nc, int nv) {
     int n = 0;
     int l, c;
-
     while (n < nv) {
-        l = sorteia(0, nl - 1);
-        c = sorteia(0, nc - 1);
-
-        if (Tab[l][c] == AGUA) {
-            Tab[l][c] = NAVIO;
-            n++;
+        do {
+            l = sorteia(0, nl - 1);
+            c = sorteia(0, nc - 1);
         }
+        while (Tab[l][c] != AGUA);
+
+        Tab[l][c] = NAVIO;
+        n++;
     }
 }
 
