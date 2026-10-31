@@ -6,16 +6,11 @@ void desenhar(char **mapa, int largura, int altura, int px, int py, int raio) {
 
     system("clear");
 
-    for (i = 0; i < altura; i++) {
-        for (j = 0; j < largura; j++) {
-            int dx = j - px;
-            int dy = i - py;
-
-            if (dx * dx + dy * dy <= raio * raio) {
-                printf("%c", (i == py && j == px) ? '@' : mapa[i][j]);
-            }
-            else {
-                printf(" ");
+    for (i = -raio; i <= raio; i++) {
+        for (j = -raio; j <= raio; j++) {
+            if ((0 <= py + i && py + i < altura) &&
+                (0 <= px + j && px + j < largura)) {
+                printf("%c", (i == 0 && j == 0) ? '@' : mapa[py + i][px + j]);
             }
         }
         printf("\n");
@@ -62,7 +57,6 @@ int main() {
 
     printf(
         "\nPressione ENTER para comecar..."); // pq to digitando duas vezes?!?
-    getchar();
     getchar();
 
     // montar o tamanho do labirito
